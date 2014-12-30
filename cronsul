@@ -7,7 +7,8 @@ CONSUL_PORT="${CONSUL_PORT:-8500}"
 CONSUL_ADDR="http://${CONSUL_HOST}:${CONSUL_PORT}"
 
 usage() {
-    echo "usage: ${0##*/} <task id> <period> <command> [arg1 ...]"
+    echo "Usage:"
+    echo "  ${0##*/} <task id> [--period=<seconds>] <command>..."
     exit 1
 }
 
@@ -22,12 +23,19 @@ grab_lock_or_die() {
     fi
 }
 
+# Parse command line arguments.
 if [[ "$#" -lt 3 ]]; then
     usage
 fi
 task_id="$1"
-period="$2"
-command=("${@:3}")
+shift
+case "$1" in
+    --period) period="$2"; shift 2;;
+    --period=*) period="${1##--period=}"; shift;;
+    *) period=60;
+esac
+
+command=("$@")
 
 # This will be wrong if cron starts our job really late.
 schedule_date="$(( ($(date '+%s') / period) * period ))"
