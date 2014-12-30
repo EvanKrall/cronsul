@@ -16,8 +16,7 @@ grab_lock_or_die() {
     local task_id="$1"
     local schedule_date="$2"
     local period="$3"
-    hostname="$(curl -s ${CONSUL_ADDR}/v1/agent/self | jq -r .Config.NodeName)"
-    ret="$(curl -s -X PUT -d "${hostname}" "${CONSUL_ADDR}/v1/kv/cronsul/${task_id}/${period}/${schedule_date}?cas=0")"
+    ret="$(curl -s -X PUT -d "${HOSTNAME}" "${CONSUL_ADDR}/v1/kv/cronsul/${task_id}/${period}/${schedule_date}?cas=0")"
     if [[ "$ret" != "true" ]]; then
         exit
     fi
