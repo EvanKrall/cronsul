@@ -43,9 +43,9 @@ should generally be enough, but if your cron job might be started in different
 minutes on different boxes (e.g. due to different cron jobs or an overloaded
 box), you may increase this up to the frequency at which your job runs.
 
-The current Unix time is rounded down to the next lowest period, and this
-value is used to calculate the key where `cronsul`'s lock lives, so a lock
-created at 17:54 with a period of 3600 will expire at 18:00.
+The current Unix time is rounded down to the next lowest multiple of period,
+and this value is used to calculate the key where `cronsul`'s lock lives, so a
+lock created at 17:54 with a period of 3600 will expire at 18:00.
 
 ## Dependencies
 
