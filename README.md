@@ -1,6 +1,6 @@
 # Cronsul
 
-Cronsul is a very simple periodic job scheduler, built on
+Cronsul is a very simple distributed periodic job scheduler, built on
 [cron](https://en.wikipedia.org/wiki/Cron) and [consul](https://consul.io/).
 
 ## Problem Statement
