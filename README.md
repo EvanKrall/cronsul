@@ -45,3 +45,12 @@ box), you may increase this up to the frequency at which your job runs.
 The current Unix time is rounded down to the next lowest period, and this
 value is used to calculate the key where `cronsul`'s lock lives, so a lock
 created at 17:54 with a period of 3600 will expire at 18:00.
+
+## Dependencies
+
+`cronsul` depends on:
+
+ - bash 3+
+ - curl
+ - A running consul cluster.
+ - some form of cron daemon.
