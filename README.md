@@ -34,6 +34,7 @@ A typical cronjob entry might look like this:
 ```
 
 The `cronsul` script itself takes one or two arguments, in addition to a command:
+
 1. A task id. This is used to associate multiple `cronsul` runs from different
 boxes.
 2. Optionally, using `--period`, the length of the period (in seconds) during
