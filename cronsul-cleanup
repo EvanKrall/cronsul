@@ -1,0 +1,18 @@
+#!/bin/bash
+set -eu
+
+CONSUL_HOST="${CONSUL_HOST:-localhost}"
+CONSUL_PORT="${CONSUL_PORT:-8500}"
+
+CONSUL_ADDR="http://${CONSUL_HOST}:${CONSUL_PORT}"
+
+current_date="$(date +%s)"
+
+curl -s "${CONSUL_ADDR}/v1/kv/cronsul?keys" |
+    egrep -o '"([^"\\]|\\(["\\/bfnrt]|u[0-9a-fA-F]{4}))*"' |
+    sed -e 's/^"//' -e 's/"$//' |
+    while IFS=/ read -r cronsul task_id period schedule_date; do
+        if ((schedule_date + 2 * period < current_date )); then
+            curl -s -X DELETE "${CONSUL_ADDR}/v1/kv/$cronsul/$task_id/$period/$schedule_date"
+        fi
+    done

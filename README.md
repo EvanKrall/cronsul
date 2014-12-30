@@ -55,3 +55,10 @@ lock created at 17:54 with a period of 3600 will expire at 18:00.
  - curl
  - A running consul cluster.
  - some form of cron daemon.
+
+## `cronsul-cleanup`
+
+Since cronsul leaves things lying around in consul's KV store even after exit,
+a helper script, `cronsul-cleanup`, is provided to help you clean up after cronsul.
+
+It will delete any lock value that is more than two periods old.
