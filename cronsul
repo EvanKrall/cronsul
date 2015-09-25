@@ -26,7 +26,7 @@ grab_lock_or_die() {
 }
 
 # Parse command line arguments.
-if [[ "$#" -lt 3 ]]; then
+if [[ "$#" -lt 2 ]]; then
     usage
 fi
 task_id="$1"
