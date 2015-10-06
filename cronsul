@@ -21,7 +21,7 @@ grab_lock_or_die() {
         if [[ "$ret" != "false" ]]; then
              echo $ret
         fi
-        exit
+        exit 1
     fi
 }
 
